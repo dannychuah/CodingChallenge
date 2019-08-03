@@ -24,12 +24,20 @@ public class Topic {
         this.upVote = upVote;
     }
 
+    public void incrementUpVote(){
+        this.upVote =this.upVote++;
+    }
+
     public int getUpVote() {
         return upVote;
     }
 
     public void setDownVote(int downVote){
         this.downVote =downVote;
+    }
+
+    public void incrementDownVote(){
+        this.downVote =this.downVote++;
     }
 
     public int getDownVote() {
