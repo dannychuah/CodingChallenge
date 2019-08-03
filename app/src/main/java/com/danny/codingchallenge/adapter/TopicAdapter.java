@@ -1,6 +1,7 @@
 package com.danny.codingchallenge.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.danny.codingchallenge.R;
 import com.danny.codingchallenge.model.Topic;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -34,7 +37,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView topicDescription;
         public TextView topicUpvoteCountText;
         public TextView topicDownvoteCountText;
@@ -53,6 +56,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
 
         }
 
+        @Override
+        public void onClick(View view) {
+            notifyItemChanged(selectedPos);
+            selectedPos = getLayoutPosition();
+            notifyItemChanged(selectedPos);
+        }
     }
 
     @NonNull
@@ -69,7 +78,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
 
     final Topic topic = topicList.get(position);
     holder.bind(topic,mListener);
-
     holder.topicDescription.setText(topic.getTopicDescription());
     holder.topicDownvoteCountText.setText(topic.getDownVote()+mContext.getResources().getString(R.string.vote));
     holder.topicUpvoteCountText.setText(topic.getUpVote()+mContext.getResources().getString(R.string.vote));
@@ -79,6 +87,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
         public void onClick(View view) {
             topic.incrementDownVote();
             holder.topicDownvoteCountText.setText(topic.getDownVote()+mContext.getResources().getString(R.string.vote));
+//            TopicAdapter.this.notifyDataSetChanged();
         }
     });
 
@@ -87,15 +96,39 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
         public void onClick(View view) {
             topic.incrementUpVote();
             holder.topicUpvoteCountText.setText(topic.getUpVote()+mContext.getResources().getString(R.string.vote));
+            sorting();
+            TopicAdapter.this.notifyDataSetChanged();
         }
     });
 
     holder.itemView.setSelected(selectedPos == position);
     }
 
+//    @Override
+//    public int getItemCount() {
+//        return topicList.size();
+//    }
+    private final int limit = 4;
+
+
     @Override
     public int getItemCount() {
-        return 0;
+        if(topicList.size() > limit){
+            return limit;
+        }
+        else
+        {
+            return topicList.size();
+        }
+
+    }
+    public void sorting() {
+        Collections.sort(topicList, new Comparator<Topic>() {
+            public int compare(Topic emp1, Topic emp2) {
+                Log.e("Sss", String.valueOf(Integer.compare(emp1.getUpVote(),emp2.getUpVote())));
+                return   Integer.compare(emp2.getUpVote(),emp1.getUpVote());
+            }
+        });
     }
 
 }

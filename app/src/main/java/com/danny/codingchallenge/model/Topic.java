@@ -7,8 +7,14 @@ public class Topic {
 
     public Topic() {
     }
+    public Topic(String topicDescription) {
+        this.topicDescription = topicDescription;
+    }
 
     public Topic(String topicDescription, int upVote, int downVote ){
+        this.topicDescription = topicDescription;
+        this.upVote = upVote;
+        this.downVote =downVote;
 
     }
 
@@ -25,7 +31,7 @@ public class Topic {
     }
 
     public void incrementUpVote(){
-        this.upVote =this.upVote++;
+        ++this.upVote;
     }
 
     public int getUpVote() {
@@ -37,10 +43,14 @@ public class Topic {
     }
 
     public void incrementDownVote(){
-        this.downVote =this.downVote++;
+        ++this.downVote;
     }
 
     public int getDownVote() {
         return downVote;
+    }
+
+    public  String toString(){
+        return "Topic :"+ topicDescription + ",Upvote :"+upVote+ ",Downvote :"+downVote;
     }
 }

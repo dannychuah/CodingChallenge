@@ -4,4 +4,6 @@
     <string name="initial_vote">0 vote</string>
     <string name="sample_topic">best quick meals. blood pressure.</string>
     <string name="vote">&#160;votes</string>
+    <string name="hint_create_topic">Enter Topic that does not exceed 255 characters.</string>
+    <string name="create">Create Topic </string>
 </resources>
