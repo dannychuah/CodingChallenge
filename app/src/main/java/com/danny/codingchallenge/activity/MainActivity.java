@@ -1,7 +1,8 @@
-package com.danny.codingchallenge;
+package com.danny.codingchallenge.activity;
 
 import android.os.Bundle;
 
+import com.danny.codingchallenge.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
