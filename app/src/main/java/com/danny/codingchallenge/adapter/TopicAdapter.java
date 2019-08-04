@@ -108,7 +108,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
 //    public int getItemCount() {
 //        return topicList.size();
 //    }
-    private final int limit = 4;
+    private final int limit = 20;
 
 
     @Override
